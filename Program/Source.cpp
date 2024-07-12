@@ -1,29 +1,55 @@
 ﻿#include <iostream>
 
+#define SIZE 5
+
 using namespace std;
 
-bool IsPrime(int n)
+void BubbleSort()
 {
-	if (n <= 1)
+	int list[SIZE];
+
+	for (int i = 0; i < SIZE; i++)
 	{
-		return false;
+		int insert = 0;
+
+		cin >> insert;
+
+		list[i] = insert;
 	}
 
-	for (int i = 2; i < n; i++)
+	int temp = 0;
+
+	for (int i = 0; i < SIZE - 1; i++)
 	{
-		if (n % i == 0)
+		for (int j = 0; j < SIZE - (i+1); j++)
 		{
-			return false;
+			if (list[j] > list[j + 1])
+			{
+				temp = list[j + 1];
+				list[j + 1] = list[j];
+				list[j] = temp;
+			}
 		}
 	}
 
-	return true;
-	
+	for (const int & element : list)
+	{
+		cout << element << " ";
+	}
+
 }
 
 int main()
 {
+#pragma region 거품 정렬
+	// 서로 인접한 두 원소를 검사하여 정렬하는 알고리즘입니다. 
+
+	BubbleSort();
+
 	
+
+#pragma endregion
+
 
 	return 0;
 }

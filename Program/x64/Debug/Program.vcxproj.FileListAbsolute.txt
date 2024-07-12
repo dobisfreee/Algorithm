@@ -1,1 +1,2 @@
 C:\Users\USER\Desktop\Program\x64\Debug\Program.exe
+C:\Users\USER\Desktop\Algorithm\Program\x64\Debug\Program.exe
