@@ -8,7 +8,7 @@ void SelectionSort(int a, int b, int c, int d, int e)
 {
 	int list[] = { a,b,c,d,e };
 
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < SIZE-1; i++)
 	{
 		int min = list[i];
 		int select = i;
