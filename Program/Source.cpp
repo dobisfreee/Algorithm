@@ -1,63 +1,108 @@
 ﻿#include <iostream>
-
-#include <math.h>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
-#define SIZE 7
-
+#define SIZE 8
 class Graph
 {
 private:
-	int parent[SIZE];
+	class Edge
+	{
+	private:
+		int x;
+		int y;
+		int distance;
+
+		int parent[SIZE];
+
+	public:
+
+		Edge(int x, int y, int distance) 
+		{
+			this->x = x;
+			this->y = y;
+			this->distance = distance;
+
+			for (int i = 1; i < SIZE; i++)
+			{
+				parent[i] = i;
+			}
+		}
+
+		int& X()
+		{
+			return x;
+		}
+
+		int& Y()
+		{
+			return y;
+		}
+
+		int& Distance()
+		{
+			return distance;
+		}
+	};
+
+	vector <Edge> graph;
 
 public:
 	Graph()
 	{
-		for (int i = 1; i < SIZE; i++)
-		{	
-			parent[i] = i;
-		}
+		
 	}
 
-	int Find(int x) 
-		// 부모를 찾는 함수, 배열의 인덱스와 값이 같다면 루트 노드 발견
-		// 부모는 항상 작은 값 
+	void Insert(int x, int y, int distance)
 	{
-		if (parent[x] == x)
+		graph.push_back(Edge(x,y,distance));
+	}
+
+	void Kruskal() // cf) end는 순방향, c(onverse)end는 역방향 
+	{
+		sort(graph.begin(), graph.end());
+
+		int sum = 0;
+
+		for (int i = 0; i < graph.size(); i++)
 		{
-			return x;
+			sum += graph[i].Distance();
 		}
-		else
-		{
-			Find(x - 1);
-		}
-	}
-
-	void Union(int x, int y) // x : 1 y : 2 를 넣었을 때, 1이 부모 2 가 자식이므로 
-		// parent[2]에 부모의 값 1을 넣어준다 그럼 합쳐진 것
-	{
-		parent[max(x, y)] = parent[min(x, y)]; 
-		// parent[2]      =     1
-	}
-
-	bool Same(int x, int y) // 부모가 같으면 true를 다르면 false
-	{
-
 	}
 };
 
 int main()
 {
-#pragma region 유니온 파인드
-	// 여러 노드가 존재할 때 어떤 노드가 다른 노드와 연결되어 있는지 확인하는
-	// 알고리즘입니다.
+#pragma region 신장 트리
+	// 그래프의 모든 정점을 포함하면서 사이클이 존재하지 않는
+	// 부분 그래프로, 그래프의 모든 정점을 최소 비용으로 연결하는 트리입니다. 
 
-	// 유니온 파인드의 시간 복잡도
-	// O(MlogN) : M은 연산의 개수, N은 노드의 개수
-	// M이 N²에 가까울 때는 O(N²logN)이 됩니다. 
+	// 그래프의 정점의 수가 n개일 때, 간선의 수는 n-1개입니다. 
+
+	// 최소 비용 신장 트리
+	// 그래프의 간선들의 가중치 합이 최소인 신장 트리 
+
+	// 거리가 작은 순으로 vertex를 서로 연결
+
+	Graph graph;
+
+	graph.Insert(1, 7, 10);
+	graph.Insert(1, 4, 28);
+	graph.Insert(1, 2, 66);
+	graph.Insert(1, 5, 19);
+
+	graph.Insert(2, 4, 25);
+	graph.Insert(2, 5, 60);
+
+	graph.Insert(3, 5, 21);
+	graph.Insert(3, 6, 35);
+
+	graph.Insert(4, 7, 15);
+	graph.Insert(5, 6, 40);
+
 #pragma endregion
-
 
 
 	return 0;
