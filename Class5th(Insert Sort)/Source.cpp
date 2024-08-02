@@ -15,12 +15,12 @@ void InsertSort(int a, int b, int c, int d, int e)
 	{
 		key = list[i];
 
-		for (j = i - 1; j >= 0 && list[j] > key; j--) // list[j]가 key 보다 작으면 바로 반복을 종료 
+		for (j = i - 1; j >= 0 && list[j] > key; j--)  
 		{
 			list[j + 1] = list[j];
 		}
 
-		list[j + 1] = key;
+		list[j + 1] = key;	// 조건이 맞지 않아 반복문을 탈출하기 전에 j-1을 하기 때문에 j+1을 해주어야 한다. 
 	}
 
 	for (const int& element : list)
